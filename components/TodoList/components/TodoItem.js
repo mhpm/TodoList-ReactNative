@@ -1,7 +1,8 @@
 import React, { useState } from "react"
-import { TouchableOpacity, View, Text } from "react-native"
-import Modal from "react-native-modal"
-import styled, { css } from "styled-components"
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native"
+import styled from "styled-components"
+import { MaterialIcons } from "@expo/vector-icons"
+import Modal from "./Modal"
 
 export default function TodoItem({ item, pressHandler }) {
   const [isModalVisible, setModalVisible] = useState(false)
@@ -9,86 +10,43 @@ export default function TodoItem({ item, pressHandler }) {
   const toggleModal = () => {
     setModalVisible(!isModalVisible)
   }
+
   return (
     <View>
-      <TouchableOpacity onPress={toggleModal}>
-        <Item>{item.text}</Item>
-      </TouchableOpacity>
-      <Modal isVisible={isModalVisible}>
-        <ModalBody>
-          <ModalTitle styled={{ margin: 0 + "!important" }}>
-            ¿Quieres borrar esta tarea?
-          </ModalTitle>
-          <ButtonGroup>
-            <Button primary onPress={() => pressHandler(item.id)}>
-              <ButtonText>SI</ButtonText>
-            </Button>
-            <Button onPress={toggleModal}>
-              <ButtonText>No</ButtonText>
-            </Button>
-          </ButtonGroup>
-        </ModalBody>
-      </Modal>
+      <Item>
+        <TextItem>{item.text}asdasd</TextItem>
+        <TouchableOpacity onPress={toggleModal}>
+          <MaterialIcons
+            name="delete"
+            color="#cecece"
+            size={20}
+          ></MaterialIcons>
+        </TouchableOpacity>
+      </Item>
+      <Modal
+        isVisible={isModalVisible}
+        toggleModal={toggleModal}
+        handlePress={() => pressHandler(item.id)}
+      />
     </View>
   )
 }
 
-const Item = styled.Text`
+const Item = styled.View`
+  flex: 1;
   padding: 15px;
   height: 50px;
-  margin-top: 13px;
   background-color: #fff;
-  align-self: stretch;
-  text-align: center;
   border-radius: 100px;
-  font-weight: bold;
-  color: #c9c9c9;
-  box-shadow: 10px 5px 5px black;
-`
-
-const ButtonGroup = styled.View`
-  flex: 1;
   flex-direction: row;
   justify-content: space-between;
+  box-shadow: 10px 5px 5px black;
+  margin-bottom: 10px;
 `
 
-const Button = styled.TouchableOpacity`
-  align-items: center;
-  width: 45%;
-  height: 50px;
-  border-radius: 100px;
-  padding: 15px;
-  margin-top: 10px;
-  background-color: #cccccc;
-  ${(props) =>
-    props.primary &&
-    css`
-      background-color: #007c7c;
-      color: #666666;
-    `}
-`
-
-const ButtonText = styled.Text`
-  text-align: center;
-  font-weight: bold;
-  font-size: 16px;
-  color: white;
-`
-
-const ModalTitle = styled.Text`
-  padding: 15px;
-  background-color: #fff;
+const TextItem = styled.Text`
   align-self: stretch;
   text-align: center;
-  border-radius: 100px;
   font-weight: bold;
-  color: darkgray;
-  box-shadow: 10px 5px 5px black;
-`
-
-const ModalBody = styled.View`
-  padding: 30px;
-  border-radius: 15px;
-  height: 200px;
-  background-color: white;
+  color: #c9c9c9;
 `

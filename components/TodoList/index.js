@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import TodoItem from "./components/TodoItem"
 import AddTodo from "./components/AddTodo"
-import { TouchableWithoutFeedback, Keyboard, AsyncStorage } from "react-native"
+import {
+  TouchableWithoutFeedback,
+  Keyboard,
+  AsyncStorage,
+  FlatList,
+} from "react-native"
 
 export default function TodoList() {
   const [todos, setTodos] = useState([])
@@ -62,13 +67,13 @@ export default function TodoList() {
         <Container>
           <AddTodo submitHandler={submitHandler} />
           <Line />
-          <List
+          <FlatList
             keyExtractor={(item) => item.id}
             data={todos}
             renderItem={({ item }) => (
               <TodoItem item={item} pressHandler={pressHandler} />
             )}
-          ></List>
+          ></FlatList>
         </Container>
       </Main>
     </TouchableWithoutFeedback>
@@ -76,8 +81,10 @@ export default function TodoList() {
 }
 
 const Container = styled.View`
+  flex: 1;
   padding-right: 20px;
   padding-left: 20px;
+  padding-bottom: 10px;
 `
 
 const Main = styled.View`
@@ -85,13 +92,10 @@ const Main = styled.View`
   background-color: #ededed;
 `
 
-const List = styled.FlatList`
-  margin-top: 20px;
-`
-
 const Line = styled.View`
   width: 100%;
   border-bottom-color: #f5f5f5;
   border-bottom-width: 1px;
   margin-top: 20px;
+  margin-bottom: 10px;
 `

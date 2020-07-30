@@ -1,10 +1,8 @@
 import React, { useState } from "react"
 import { View, Alert } from "react-native"
 import styled, { css } from "styled-components"
-import { useNavigation } from "@react-navigation/native"
 
 export default function AddTodo({ submitHandler }) {
-  const navigation = useNavigation()
   const [text, setText] = useState("")
 
   const addHandler = () => {
