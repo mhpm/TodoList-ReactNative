@@ -63,7 +63,7 @@ const Button = styled.TouchableOpacity`
   ${(props) =>
     props.primary &&
     css`
-      background-color: #ffae2c;
+      background-color: #007c7c;
       color: #666666;
     `}
 `

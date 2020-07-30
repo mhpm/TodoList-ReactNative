@@ -47,7 +47,7 @@ const Button = styled.TouchableOpacity`
   border-radius: 100px;
   padding: 15px;
   margin-top: 10px;
-  background-color: #ffae2c;
+  background-color: #007c7c;
   ${(props) =>
     props.disabled &&
     css`
